@@ -1,3 +1,3 @@
-__all__ = ["TestSolution"]
+__all__ = ["TestSolution", "TestValidator"]
 
-from .test_rednosed_reports import TestSolution
+from .test_rednosed_reports import TestSolution, TestValidator

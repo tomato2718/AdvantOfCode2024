@@ -1,3 +1,3 @@
-__all__ = ["Solution"]
+__all__ = ["Solution", "Validator"]
 
-from ._rednosed_reports import Solution
+from ._rednosed_reports import Solution, Validator
