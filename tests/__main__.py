@@ -1,11 +1,12 @@
-from . import day1
+from . import day1, day2
 from .helper import Testable
 
 
 def main() -> None:
-    for test_name in day1.__all__:
-        test_class: type[Testable] = getattr(day1, test_name)
-        test_class().run_tests()
+    for day in (day1, day2):
+        for test_name in day.__all__:
+            test_class: type[Testable] = getattr(day, test_name)
+            test_class().run_tests()
 
 
 if __name__ == "__main__":
