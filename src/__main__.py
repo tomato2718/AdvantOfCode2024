@@ -23,6 +23,7 @@ def solve_day3() -> None:
     input = day3.parse_input(".input.puzzle.day3")
     solution = day3.Solution()
     print(solution.add_up_mul(input))
+    print(solution.add_up_mul_with_switch(input))
 
 
 if __name__ == "__main__":
