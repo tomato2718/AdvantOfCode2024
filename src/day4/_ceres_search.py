@@ -1,4 +1,4 @@
-__all__ = ["Solution", "FindXMAS"]
+__all__ = ["Solution", "FindXMAS", "FindX_MAS"]
 
 from typing import Callable, Literal
 
@@ -91,3 +91,21 @@ class FindXMAS:
                 return False
         except IndexError:
             return False
+
+
+class FindX_MAS:
+    def __call__(self, puzzle: _Puzzle, index: _Index) -> int:
+        x, y = index
+        if x == 0 or y == 0 or puzzle[y][x] != "A":
+            return 0
+        try:
+            return self._is_mas(
+                (puzzle[y + 1][x - 1], puzzle[y][x], puzzle[y - 1][x + 1])
+            ) and self._is_mas(
+                (puzzle[y - 1][x - 1], puzzle[y][x], puzzle[y + 1][x + 1])
+            )
+        except IndexError:
+            return 0
+
+    def _is_mas(self, t: tuple[_XmasChar, _XmasChar, _XmasChar]) -> bool:
+        return t == ("M", "A", "S") or t == ("S", "A", "M")

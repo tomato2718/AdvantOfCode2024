@@ -31,6 +31,8 @@ def solve_day4() -> None:
     input = day4.parse_input(".puzzle/d4")
     solution = day4.Solution(search_policy=day4.FindXMAS())
     print(solution.search(input))
+    solution = day4.Solution(search_policy=day4.FindX_MAS())
+    print(solution.search(input))
 
 
 if __name__ == "__main__":
