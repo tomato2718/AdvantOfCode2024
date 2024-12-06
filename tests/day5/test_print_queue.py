@@ -47,3 +47,12 @@ class TestSolution(Testable):
         result = solution.get_correct_updates(TEST_CASE)
 
         assert result == 143
+
+    def test_get_fixed_incorrect_updates_givenPuzzle_returnSumOfMiddlePageOfFixedIncorrectOrder(
+        self,
+    ) -> None:
+        solution = Solution(ORDERS)
+
+        result = solution.get_fixed_incorrect_updates(TEST_CASE)
+
+        assert result == 123

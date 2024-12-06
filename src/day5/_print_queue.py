@@ -41,3 +41,19 @@ class Solution:
     def _find_middle(self, pages: list[_Page]) -> _Page:
         middle = len(pages) // 2
         return pages[middle]
+
+    def get_fixed_incorrect_updates(self, updates: Iterable[list[_Page]]) -> int:
+        total = 0
+        for pages in updates:
+            if not self._is_correct(pages):
+                fixed = self._fix_incorrect_pages(pages)
+                total += self._find_middle(fixed)
+        return total
+
+    def _fix_incorrect_pages(self, pages: list[_Page]) -> list[_Page]:
+        weights = {page: 0 for page in pages}
+        for page in pages:
+            for not_after in self._orders.get(page, set()):
+                if not_after in weights:
+                    weights[not_after] += 1
+        return sorted(pages, key=lambda x: weights[x])

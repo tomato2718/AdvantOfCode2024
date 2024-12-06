@@ -40,6 +40,7 @@ def solve_day5() -> None:
     orders, updates = day5.parse_input(".puzzle/d5")
     solution = day5.Solution(orders)
     print(solution.get_correct_updates(updates))
+    print(solution.get_fixed_incorrect_updates(updates))
 
 
 if __name__ == "__main__":
