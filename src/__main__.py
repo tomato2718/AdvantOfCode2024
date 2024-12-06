@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5
+from . import day1, day2, day3, day4, day5, day6
 
 
 def solve_day1() -> None:
@@ -43,9 +43,17 @@ def solve_day5() -> None:
     print(solution.get_fixed_incorrect_updates(updates))
 
 
+def solve_day6() -> None:
+    print("===== Day6 =====")
+    map_ = day6.parse_input(".puzzle/d6")
+    solution = day6.Solution(map_)
+    print(solution.get_visited_positions())
+
+
 if __name__ == "__main__":
     solve_day1()
     solve_day2()
     solve_day3()
     solve_day4()
     solve_day5()
+    solve_day6()
