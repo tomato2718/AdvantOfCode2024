@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4
+from . import day1, day2, day3, day4, day5
 
 
 def solve_day1() -> None:
@@ -35,8 +35,16 @@ def solve_day4() -> None:
     print(solution.search(input))
 
 
+def solve_day5() -> None:
+    print("===== Day5 =====")
+    orders, updates = day5.parse_input(".puzzle/d5")
+    solution = day5.Solution(orders)
+    print(solution.get_correct_updates(updates))
+
+
 if __name__ == "__main__":
     solve_day1()
     solve_day2()
     solve_day3()
     solve_day4()
+    solve_day5()
