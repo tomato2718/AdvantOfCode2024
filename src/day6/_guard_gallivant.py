@@ -61,6 +61,8 @@ class Solution:
             or coordinate[1] == len(self._map)
         )
 
+    def get_positions_stuck_guard(self) -> int: ...
+
 
 class Guard:
     _coordinate: _Coordinate
