@@ -1,6 +1,6 @@
 __all__ = ["TestSolution"]
 
-from src.day7 import Solution
+from src.day7 import Operator, Solution
 from src.day7._bridge_repair import _Puzzle
 from tests.helper import Testable
 
@@ -18,9 +18,31 @@ TEST_CASE: list[_Puzzle] = [
 
 
 class TestSolution(Testable):
-    def test_calculate_calibration_total(self) -> None:
-        solution = Solution(TEST_CASE)
+    def test_calculate_calibration_total_withAddAndMultiplyOperator_returnCalibratedTotal(
+        self,
+    ) -> None:
+        solution = Solution(
+            operators=[
+                Operator.add_operate,
+                Operator.multiply_operate,
+            ]
+        )
 
-        result = solution.calculate_calibration_total()
+        result = solution.calculate_calibration_total(TEST_CASE)
 
         assert result == 3749
+
+    def test_calculate_calibration_total_withAddMultiplyAndConcatenationOperator_returnCalibratedTotal(
+        self,
+    ) -> None:
+        solution = Solution(
+            operators=[
+                Operator.add_operate,
+                Operator.multiply_operate,
+                Operator.concatenation_operate,
+            ]
+        )
+
+        result = solution.calculate_calibration_total(TEST_CASE)
+
+        assert result == 11387

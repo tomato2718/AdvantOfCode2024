@@ -1,7 +1,9 @@
-__all__ = ["Solution"]
+__all__ = ["Solution", "Operator"]
 
 from collections.abc import Iterable
-from typing import TypedDict
+from itertools import product
+from math import floor, log10
+from typing import Callable, TypedDict
 
 
 class _Puzzle(TypedDict):
@@ -10,14 +12,17 @@ class _Puzzle(TypedDict):
 
 
 class Solution:
-    _puzzles: Iterable[_Puzzle]
+    _operators: Iterable[Callable[[int, int], int]]
 
-    def __init__(self, puzzles: Iterable[_Puzzle]) -> None:
-        self._puzzles = puzzles
+    def __init__(
+        self,
+        operators: Iterable[Callable[[int, int], int]],
+    ) -> None:
+        self._operators = operators
 
-    def calculate_calibration_total(self) -> int:
+    def calculate_calibration_total(self, puzzles: Iterable[_Puzzle]) -> int:
         total = 0
-        for puzzle in self._puzzles:
+        for puzzle in puzzles:
             if self._is_possible(puzzle):
                 total += puzzle["target"]
         return total
@@ -25,16 +30,27 @@ class Solution:
     def _is_possible(self, puzzle: _Puzzle) -> bool:
         target, values = puzzle["target"], puzzle["values"]
         is_possible = False
-        combination = 2 ** (len(values) - 1)
-        for comb in range(combination):
+        combinations = product(self._operators, repeat=len(values) - 1)
+        for comb in combinations:
             total = values[0]
-            for i in range(1, len(values)):
-                if comb & 1:
-                    total *= values[i]
-                else:
-                    total += values[i]
-                comb >>= 1
+            for i, operate in enumerate(comb):
+                total = operate(total, values[i + 1])
             if total == target:
                 is_possible = True
                 break
         return is_possible
+
+
+class Operator:
+    @staticmethod
+    def add_operate(a: int, b: int) -> int:
+        return a + b
+
+    @staticmethod
+    def multiply_operate(a: int, b: int) -> int:
+        return a * b
+
+    @staticmethod
+    def concatenation_operate(a: int, b: int) -> int:
+        digits = floor(log10(b)) + 1
+        return a * 10**digits + b

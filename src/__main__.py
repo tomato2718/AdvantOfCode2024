@@ -53,9 +53,21 @@ def solve_day6() -> None:
 def solve_day7() -> None:
     print("===== Day7 =====")
     puzzles = day7.parse_input(".puzzle/d7")
-    solution = day7.Solution(puzzles)
-    print(solution.calculate_calibration_total())
-
+    solution = day7.Solution(
+        operators=[
+            day7.Operator.add_operate,
+            day7.Operator.multiply_operate,
+        ]
+    )
+    print(solution.calculate_calibration_total(puzzles))
+    solution = day7.Solution(
+        operators=[
+            day7.Operator.add_operate,
+            day7.Operator.multiply_operate,
+            day7.Operator.concatenation_operate,
+        ]
+    )
+    print(solution.calculate_calibration_total(puzzles))
 
 
 def solve_day8() -> None:
