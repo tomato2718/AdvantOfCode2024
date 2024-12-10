@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5, day6
+from . import day1, day2, day3, day4, day5, day6, day8
 
 
 def solve_day1() -> None:
@@ -50,6 +50,18 @@ def solve_day6() -> None:
     print(solution.get_visited_positions())
 
 
+def solve_day7() -> None:
+    """Ran out of time, too busy :/"""
+
+
+def solve_day8() -> None:
+    print("===== Day8 =====")
+    map_ = day8.parse_input(".puzzle/d8")
+    solution = day8.Solution(map_)
+    print(solution.count_closest_antinodes())
+    print(solution.count_all_antinodes())
+
+
 if __name__ == "__main__":
     solve_day1()
     solve_day2()
@@ -57,3 +69,4 @@ if __name__ == "__main__":
     solve_day4()
     solve_day5()
     solve_day6()
+    solve_day8()
