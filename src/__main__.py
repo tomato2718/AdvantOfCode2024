@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5, day6, day8
+from . import day1, day2, day3, day4, day5, day6, day7, day8
 
 
 def solve_day1() -> None:
@@ -51,7 +51,11 @@ def solve_day6() -> None:
 
 
 def solve_day7() -> None:
-    """Ran out of time, too busy :/"""
+    print("===== Day7 =====")
+    puzzles = day7.parse_input(".puzzle/d7")
+    solution = day7.Solution(puzzles)
+    print(solution.calculate_calibration_total())
+
 
 
 def solve_day8() -> None:
@@ -69,4 +73,5 @@ if __name__ == "__main__":
     solve_day4()
     solve_day5()
     solve_day6()
+    solve_day7()
     solve_day8()
