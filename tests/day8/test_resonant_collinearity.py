@@ -20,14 +20,16 @@ TEST_CASE = [
 
 
 class TestSolution(Testable):
-    def test_find_closest_antinodes(self) -> None:
+    def test_count_closest_antinodes_whenCalled_returnTotalOfOnlyClosestAntinodes(
+        self,
+    ) -> None:
         solution = Solution(TEST_CASE)
 
         antinodes = solution.count_closest_antinodes()
 
         assert antinodes == 14
 
-    def test_find_all_antinodes(self) -> None:
+    def test_find_all_antinodes_whenCalled_returnTotalOfAllAntinodesInMap(self) -> None:
         solution = Solution(TEST_CASE)
 
         antinodes = solution.count_all_antinodes()
