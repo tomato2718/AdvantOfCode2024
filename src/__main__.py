@@ -88,6 +88,7 @@ def solve_day10() -> None:
     print("===== Day10 =====")
     map_ = day10.parse_input(".puzzle/d10")
     print(day10.Solution.find_possible_path_count(map_))
+    print(day10.Solution2.find_possible_path_rating(map_))
 
 
 if __name__ == "__main__":

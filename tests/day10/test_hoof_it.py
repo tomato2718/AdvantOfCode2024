@@ -1,6 +1,6 @@
 __all__ = ["TestSolution"]
 
-from src.day10 import Solution
+from src.day10 import Solution, Solution2
 from tests.helper import Testable
 
 TEST_CASE = [
@@ -20,3 +20,12 @@ class TestSolution(Testable):
         count = Solution.find_possible_path_count(TEST_CASE)
 
         assert count == 36
+
+
+class TestSolution2(Testable):
+    def test_find_possible_path_rating_givenMap_returnTotalRatingOfPossiblePath(
+        self,
+    ) -> None:
+        rating = Solution2.find_possible_path_rating(TEST_CASE)
+
+        assert rating == 81
