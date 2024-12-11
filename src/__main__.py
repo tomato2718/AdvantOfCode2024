@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5, day6, day7, day8
+from . import day1, day2, day3, day4, day5, day6, day7, day8, day9
 
 
 def solve_day1() -> None:
@@ -78,6 +78,12 @@ def solve_day8() -> None:
     print(solution.count_all_antinodes())
 
 
+def solve_day9() -> None:
+    print("===== Day9 =====")
+    diskmap = day9.parse_input(".puzzle/d9")
+    print(day9.Solution.calculate_checksum(diskmap))
+
+
 if __name__ == "__main__":
     solve_day1()
     solve_day2()
@@ -87,3 +93,4 @@ if __name__ == "__main__":
     solve_day6()
     solve_day7()
     solve_day8()
+    solve_day9()
