@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5, day6, day7, day8, day9, day10
+from . import day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11
 
 
 def solve_day1() -> None:
@@ -91,5 +91,19 @@ def solve_day10() -> None:
     print(day10.Solution2.find_possible_path_rating(map_))
 
 
+def solve_day11() -> None:
+    print("===== Day11 =====")
+    stones = day11.parse_input(".puzzle/d11")
+    solution = day11.Solution(
+        day11.Cache(
+            day11.Replace0To1(
+                day11.SplitEvenDigits(day11.MultiplyBy2024(day11.Unchanged()))
+            )
+        )
+    )
+    print(solution.simulate(stones, count=25))
+    print(solution.simulate(stones, count=75))
+
+
 if __name__ == "__main__":
-    solve_day10()
+    solve_day11()
