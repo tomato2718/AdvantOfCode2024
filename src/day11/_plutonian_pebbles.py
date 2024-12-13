@@ -20,20 +20,12 @@ class Solution:
     def simulate(self, __stones: list[int], *, count: int) -> int:
         return sum(self._simulate(stone, count) for stone in __stones)
 
+    @cache
     def _simulate(self, stone: int, left: int) -> int:
         if left:
-            return sum(
-                self._simulate(i, left - 5) for i in self._iterate_five_times(stone)
-            )
+            return sum(self._simulate(i, left - 1) for i in self._rule.execute(stone))
         else:
             return 1
-
-    @cache
-    def _iterate_five_times(self, stone: int) -> tuple[int, ...]:
-        result = (stone,)
-        for _ in range(5):
-            result = tuple(i for prev in result for i in self._rule.execute(prev))
-        return result
 
 
 class _Rule(ABC):
