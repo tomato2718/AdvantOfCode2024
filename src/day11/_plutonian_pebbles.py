@@ -9,7 +9,6 @@ __all__ = [
 
 from abc import ABC, abstractmethod
 from functools import cache, reduce
-from math import floor, log10
 
 
 class Solution:
@@ -83,15 +82,13 @@ class Replace0To1(Rule):
 
 class SplitEvenDigits(Rule):
     def execute(self, stone: int) -> tuple[int, ...]:
-        if (digits := self._digits(stone)) & 1 == 0:
-            a, b = divmod(stone, 10 ** (digits / 2))
-            return (int(a), int(b))
-        else:
+        s = str(stone)
+        length = len(s)
+        if length & 1:
             return self._next.execute(stone)
-
-    @staticmethod
-    def _digits(i: int) -> int:
-        return floor(log10(i)) + 1
+        else:
+            half = length // 2
+            return (int(s[:half]), int(s[half:]))
 
 
 class MultiplyBy2024(Rule):
