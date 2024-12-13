@@ -95,10 +95,8 @@ def solve_day11() -> None:
     print("===== Day11 =====")
     stones = day11.parse_input(".puzzle/d11")
     solution = day11.Solution(
-        day11.Cache(
-            day11.Replace0To1(
-                day11.SplitEvenDigits(day11.MultiplyBy2024(day11.Unchanged()))
-            )
+        day11.Replace0To1(
+            day11.SplitEvenDigits(day11.MultiplyBy2024(day11.Unchanged()))
         )
     )
     print(solution.simulate(stones, count=25))
