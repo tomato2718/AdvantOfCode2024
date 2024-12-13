@@ -8,6 +8,7 @@ __all__ = [
 ]
 
 from abc import ABC, abstractmethod
+from functools import cache, reduce
 from math import floor, log10
 
 
@@ -22,9 +23,20 @@ class Solution:
 
     def _simulate(self, stone: int, left: int) -> int:
         if left:
-            return sum(self._simulate(i, left - 1) for i in self._rule.execute(stone))
+            return sum(
+                self._simulate(i, left - 5) for i in self._iterate_five_times(stone)
+            )
         else:
             return 1
+
+    @cache
+    def _iterate_five_times(self, stone: int) -> tuple[int, ...]:
+        result = (stone,)
+        for _ in range(5):
+            result = reduce(
+                lambda prev, cur: prev + self._rule.execute(cur), result, tuple()
+            )
+        return result
 
 
 class _Rule(ABC):
@@ -39,16 +51,16 @@ class Unchanged(_Rule):
 
 
 class Rule(_Rule):
-    _next: "_Rule"
+    _next: _Rule
 
-    def __init__(self, __next: "_Rule") -> None:
+    def __init__(self, __next: _Rule) -> None:
         self._next = __next
 
 
 class Cache(Rule):
     _cache: dict[int, tuple[int, ...]]
 
-    def __init__(self, __next) -> None:
+    def __init__(self, __next: _Rule) -> None:
         self._cache = {}
         super().__init__(__next)
 
