@@ -12,9 +12,9 @@ from functools import cache
 
 
 class Solution:
-    _rule: "Rule"
+    _rule: "_Rule"
 
-    def __init__(self, rule: "Rule") -> None:
+    def __init__(self, rule: "_Rule") -> None:
         self._rule = rule
 
     def simulate(self, __stones: list[int], *, count: int) -> int:
