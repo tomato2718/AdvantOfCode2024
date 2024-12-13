@@ -8,7 +8,7 @@ __all__ = [
 ]
 
 from abc import ABC, abstractmethod
-from functools import cache, reduce
+from functools import cache
 
 
 class Solution:
@@ -32,9 +32,7 @@ class Solution:
     def _iterate_five_times(self, stone: int) -> tuple[int, ...]:
         result = (stone,)
         for _ in range(5):
-            result = reduce(
-                lambda prev, cur: prev + self._rule.execute(cur), result, tuple()
-            )
+            result = tuple(i for prev in result for i in self._rule.execute(prev))
         return result
 
 
