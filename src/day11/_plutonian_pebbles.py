@@ -18,24 +18,24 @@ class Solution:
         self._rule = rule
 
     def simulate(self, __stones: list[int], *, count: int) -> int:
-        for _ in range(count):
-            new_stones = []
-            for stone in __stones:
-                new_stones.extend(self._rule.execute(stone))
-            print(len(new_stones) - len(__stones))
-            __stones = new_stones
-        return len(__stones)
+        return sum(self._simulate(stone, count) for stone in __stones)
+
+    def _simulate(self, stone: int, left: int) -> int:
+        if left:
+            return sum(self._simulate(i, left - 1) for i in self._rule.execute(stone))
+        else:
+            return 1
 
 
 class _Rule(ABC):
     @abstractmethod
-    def execute(self, stone: int) -> list[int]:
+    def execute(self, stone: int) -> tuple[int, ...]:
         pass
 
 
 class Unchanged(_Rule):
-    def execute(self, stone: int) -> list[int]:
-        return [stone]
+    def execute(self, stone: int) -> tuple[int, ...]:
+        return (stone,)
 
 
 class Rule(_Rule):
@@ -46,13 +46,13 @@ class Rule(_Rule):
 
 
 class Cache(Rule):
-    _cache: dict[int, list[int]]
+    _cache: dict[int, tuple[int, ...]]
 
     def __init__(self, __next) -> None:
         self._cache = {}
         super().__init__(__next)
 
-    def execute(self, stone: int) -> list[int]:
+    def execute(self, stone: int) -> tuple[int, ...]:
         if stone in self._cache:
             return self._cache[stone]
         else:
@@ -62,18 +62,18 @@ class Cache(Rule):
 
 
 class Replace0To1(Rule):
-    def execute(self, stone: int) -> list[int]:
+    def execute(self, stone: int) -> tuple[int, ...]:
         if stone == 0:
-            return [1]
+            return (1,)
         else:
             return self._next.execute(stone)
 
 
 class SplitEvenDigits(Rule):
-    def execute(self, stone: int) -> list[int]:
+    def execute(self, stone: int) -> tuple[int, ...]:
         if (digits := self._digits(stone)) & 1 == 0:
-            a, b = [*divmod(stone, 10 ** (digits / 2))]
-            return [int(a), int(b)]
+            a, b = divmod(stone, 10 ** (digits / 2))
+            return (int(a), int(b))
         else:
             return self._next.execute(stone)
 
@@ -83,5 +83,5 @@ class SplitEvenDigits(Rule):
 
 
 class MultiplyBy2024(Rule):
-    def execute(self, stone: int) -> list[int]:
-        return [stone * 2024]
+    def execute(self, stone: int) -> tuple[int, ...]:
+        return (stone * 2024,)
