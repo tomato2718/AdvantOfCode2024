@@ -1,4 +1,4 @@
-from . import day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11
+from . import day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day13
 
 
 def solve_day1() -> None:
@@ -102,6 +102,12 @@ def solve_day11() -> None:
     print(solution.simulate(stones, count=25))
     print(solution.simulate(stones, count=75))
 
+def solve_day13() -> None:
+    print("===== Day13 =====")
+    puzzles = day13.parse_input(".puzzle/d13")
+    print(day13.Solution.find_fewest_token_to_spend(puzzles))
+    print(day13.Solution.find_fewest_token_to_spend_with_prize_modified(puzzles))
+        
 
 if __name__ == "__main__":
-    solve_day11()
+    solve_day13()
