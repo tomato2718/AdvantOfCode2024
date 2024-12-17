@@ -24,11 +24,11 @@ class Solution:
     def find_fewest_token_to_spend_with_prize_modified(
         cls, puzzles: Iterable[tuple[_Equotation, _Equotation]]
     ) -> int:
-        MODIFIY_FACTOR = 10000000000000
+        FACTOR = 10000000000000
         modified_puzzles = [
             (
-                (e1[0], e1[1], e1[2] + MODIFIY_FACTOR),
-                (e2[0], e2[1], e2[2] + MODIFIY_FACTOR),
+                (e1[0], e1[1], e1[2] + FACTOR),
+                (e2[0], e2[1], e2[2] + FACTOR),
             )
             for e1, e2 in puzzles
         ]
