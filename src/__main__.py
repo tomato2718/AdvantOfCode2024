@@ -12,6 +12,7 @@ from . import (
     day11,
     day13,
     day14,
+    day15,
 )
 
 
@@ -150,5 +151,13 @@ def solve_day14() -> None:
         print(row_string)
 
 
+def solve_day15() -> None:
+    print("===== Day15 =====")
+    map_, commands = day15.parse_input(".puzzle/d15")
+    solution = day15.Solution(map_)
+    solution.execute(commands)
+    print(solution.get_gps_coordinates())
+
+
 if __name__ == "__main__":
-    solve_day14()
+    solve_day15()
