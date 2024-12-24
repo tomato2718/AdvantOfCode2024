@@ -13,6 +13,7 @@ from . import (
     day13,
     day14,
     day15,
+    day18,
 )
 
 
@@ -159,5 +160,12 @@ def solve_day15() -> None:
     print(solution.get_gps_coordinates())
 
 
+def solve_day18() -> None:
+    print("===== Day18 =====")
+    cells = day18.parse_input(".puzzle/d18")
+    print(day18.Solution.find_minimum_steps(cells[:1024], size=70))
+    print(day18.Solution.find_first_cell_block_exit(cells, size=70))
+
+
 if __name__ == "__main__":
-    solve_day15()
+    solve_day18()

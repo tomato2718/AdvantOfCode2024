@@ -13,6 +13,7 @@ from . import (
     day13,
     day14,
     day15,
+    day18,
 )
 from .helper import Testable
 
@@ -33,6 +34,7 @@ def main() -> None:
         day13,
         day14,
         day15,
+        day18,
     ):
         for test_name in day.__all__:
             test_class: type[Testable] = getattr(day, test_name)
