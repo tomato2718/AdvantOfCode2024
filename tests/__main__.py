@@ -13,6 +13,7 @@ from . import (
     day13,
     day14,
     day15,
+    day17,
     day18,
 )
 from .helper import Testable
@@ -34,6 +35,7 @@ def main() -> None:
         day13,
         day14,
         day15,
+        day17,
         day18,
     ):
         for test_name in day.__all__:

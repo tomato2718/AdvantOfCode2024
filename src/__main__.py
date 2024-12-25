@@ -13,6 +13,7 @@ from . import (
     day13,
     day14,
     day15,
+    day17,
     day18,
 )
 
@@ -160,6 +161,17 @@ def solve_day15() -> None:
     print(solution.get_gps_coordinates())
 
 
+def solve_day17() -> None:
+    print("===== Day17 =====")
+    registers, programs = day17.parse_input(".puzzle/d17")
+    computer = day17.ChronospatialComputer(
+        registers=registers,
+        operand_mapper=day17.Mapper(),
+        opcode_executor=day17.Executor(),
+    )
+    print(computer.execute(programs))
+
+
 def solve_day18() -> None:
     print("===== Day18 =====")
     cells = day18.parse_input(".puzzle/d18")
@@ -168,4 +180,4 @@ def solve_day18() -> None:
 
 
 if __name__ == "__main__":
-    solve_day18()
+    solve_day17()
