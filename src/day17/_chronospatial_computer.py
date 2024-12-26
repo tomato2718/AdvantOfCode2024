@@ -1,6 +1,7 @@
 __all__ = ["ChronospatialComputer", "Mapper"]
 
 from abc import ABC, abstractmethod
+from functools import cache
 from typing import Sequence, TypedDict
 
 
@@ -80,7 +81,7 @@ class Executor(OpcodeExecutor):
         combo_operand = computer.operand_mapper.get(computer, operand)
         match opcode:
             case 0:
-                computer.registers["A"] //= 2**combo_operand
+                computer.registers["A"] //= pow(2, combo_operand)
                 computer.pointer += 2
                 return []
             case 1:
@@ -88,7 +89,7 @@ class Executor(OpcodeExecutor):
                 computer.pointer += 2
                 return []
             case 2:
-                computer.registers["B"] = combo_operand % 8
+                computer.registers["B"] = combo_operand & 7
                 computer.pointer += 2
                 return []
             case 3:
@@ -103,14 +104,28 @@ class Executor(OpcodeExecutor):
                 return []
             case 5:
                 computer.pointer += 2
-                return [combo_operand % 8]
+                return [combo_operand & 7]
             case 6:
-                computer.registers["B"] = computer.registers["A"] // (2**combo_operand)
+                computer.registers["B"] = computer.registers["A"] // pow(
+                    2, combo_operand
+                )
                 computer.pointer += 2
                 return []
             case 7:
-                computer.registers["C"] = computer.registers["A"] // (2**combo_operand)
+                computer.registers["C"] = computer.registers["A"] // pow(
+                    2, combo_operand
+                )
                 computer.pointer += 2
                 return []
             case _:
                 raise Exception()
+
+
+@cache
+def pow(x: int, n: int) -> int:
+    if n == 0:
+        return 1
+    elif n & 1:
+        return x * (pow(x, (n - 1) // 2) ** 2)
+    else:
+        return pow(x, n // 2) ** 2
