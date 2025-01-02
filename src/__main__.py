@@ -13,6 +13,7 @@ from . import (
     day13,
     day14,
     day15,
+    day16,
     day17,
     day18,
 )
@@ -161,6 +162,12 @@ def solve_day15() -> None:
     print(solution.get_gps_coordinates())
 
 
+def solve_day16() -> None:
+    print("===== Day16 =====")
+    map_ = day16.parse_input(".puzzle/d16")
+    print(day16.Solution.find_minimum_costs(map_))
+
+
 def solve_day17() -> None:
     print("===== Day17 =====")
     registers, programs = day17.parse_input(".puzzle/d17")
@@ -180,4 +187,4 @@ def solve_day18() -> None:
 
 
 if __name__ == "__main__":
-    solve_day17()
+    solve_day16()
